@@ -1,0 +1,2 @@
+Starting with my own git
+name is 'personal_workspace'
