@@ -73,23 +73,17 @@ Generator는 위에서 잠깐 언급한 것처럼 Discriminator가 진짜 지폐
 
 ![](../.gitbook/assets/2021-09-04-5.00.56.png)
 
-DCGAN 설
+DCGAN은 Generator와 Discriminator에서 Convolution layer을 사용하는 GAN을 말한다.
 
 ### 2\) LSGAN\(Least Squares GAN\)
 
 ![](../.gitbook/assets/2021-09-04-5.03.04.png)
 
-LSGAN 설명
-
 ### 3\) CycleGAN
 
 ![](../.gitbook/assets/2021-09-04-5.05.48.png)
 
-pair, unpaired 설
-
 ![](../.gitbook/assets/2021-09-04-5.06.14.png)
-
-CycleGAN 이유
 
 
 
