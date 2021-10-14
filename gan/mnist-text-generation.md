@@ -238,3 +238,5 @@ pplt.show()
 ![result samples for 210 epochs](<../.gitbook/assets/스크린샷 2021-10-14 오전 9.09.16.png>)
 
 ![Graph (epoch / batch)](<../.gitbook/assets/스크린샷 2021-10-14 오전 9.09.50.png>)
+
+![after 800 epochs with (dropout, LeakyReLU)](<../.gitbook/assets/image (70).png>)
