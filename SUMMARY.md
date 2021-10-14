@@ -36,4 +36,4 @@
 ## GAN
 
 * [Basic Information](gan/basic-information.md)
-* [MNIST Text Generation](gan/mnist-text-generation.md)
+* [MNIST Generation](gan/mnist-generation.md)
