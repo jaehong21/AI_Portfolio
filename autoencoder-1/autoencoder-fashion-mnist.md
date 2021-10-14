@@ -125,7 +125,5 @@ for epoch in range(1, EPOCH+1):
         plt.show()
 ```
 
-![Epoch 1~3 and Epoch 8~10](../.gitbook/assets/image%20%2829%29.png)
-
-
+![Epoch 1\~3 and Epoch 8\~10](<../.gitbook/assets/image (21).png>)
 

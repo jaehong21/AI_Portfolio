@@ -1,5 +1,5 @@
 ---
-description: 'CNN에 들어가기 전에, 분류(classification)을 하는 간단한 인공 신경망을 구현하는 페이지다.'
+description: CNN에 들어가기 전에, 분류(classification)을 하는 간단한 인공 신경망을 구현하는 페이지다.
 ---
 
 # Neural Network Implementation
@@ -100,4 +100,3 @@ model.eval()
 test_loss_before = criterion(torch.squeeze(model(x_test)), y_test)
 print('After Training, test loss is {}'.format(test_loss_before.item()))
 ```
-

@@ -1,5 +1,5 @@
 ---
-description: 'RNN은 간단하게, 파이썬 혹은 파이토치를 이용하여 구현해 볼 수 있다.'
+description: RNN은 간단하게, 파이썬 혹은 파이토치를 이용하여 구현해 볼 수 있다.
 ---
 
 # Creating Simple RNN
@@ -101,8 +101,7 @@ print(_status.shape)
 # 마지막 시점의 hidden state는 (1, 1, 8)의 크기를 가짐
 ```
 
-다음 페이지에서는 앞서 언급 내용을 토대로, 데이터 전처리 과정부터 시작하여 '네이버 영화 데이터 리뷰 데이터셋'을 이용하여 감정 분석\(Sentimental Classification\) task를 다뤄보고자 한다.
+다음 페이지에서는 앞서 언급 내용을 토대로, 데이터 전처리 과정부터 시작하여 '네이버 영화 데이터 리뷰 데이터셋'을 이용하여 감정 분석(Sentimental Classification) task를 다뤄보고자 한다.
 
-사진 및 내용 출처:   
+사진 및 내용 출처: \
 [https://wikidocs.net/24996](https://wikidocs.net/60690)
-

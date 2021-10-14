@@ -15,7 +15,7 @@
 * [Creating CNN Layer](cnn/creating-cnn-model.md)
 * [CNN MNIST Classification](cnn/cnn-mnist-classification.md)
 
-## Autoencoder <a id="autoencoder-1"></a>
+## Autoencoder <a href="autoencoder-1" id="autoencoder-1"></a>
 
 * [Basic Information](autoencoder-1/basic-information.md)
 * [AutoEncoder fashion MNIST](autoencoder-1/autoencoder-fashion-mnist.md)
@@ -36,4 +36,4 @@
 ## GAN
 
 * [Basic Information](gan/basic-information.md)
-
+* [MNIST Text Generation](gan/mnist-text-generation.md)

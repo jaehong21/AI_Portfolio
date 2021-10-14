@@ -4,7 +4,7 @@ description: 저번 페이지에 제시되어 있는 기본적인 개념을 Pyth
 
 # Simple Example using Python
 
-Numpy\(Numerical Python\)은 파이썬 라이브러리로서 벡터 및 행렬 연산에 있어서 편리한 기능을 제공합니다. 이후에 pandas, matplotlib라는 라이브러리와 함께 계속하여 사용할 것입니다. 
+Numpy(Numerical Python)은 파이썬 라이브러리로서 벡터 및 행렬 연산에 있어서 편리한 기능을 제공합니다. 이후에 pandas, matplotlib라는 라이브러리와 함께 계속하여 사용할 것입니다. 
 
 ```python
 import numpy as np
@@ -12,8 +12,8 @@ x_train = np.array ( [1., 2., 3., 4., 5., 6.] )
 y_train = np.array ( [11., 15., 19., 23., 27., 31.] )
 ```
 
-sample 값과 target을 위와 같이 정의합니다. 이 데이터를 가장 잘 나타내는 선은   
-H\(x\) = 4x + 7입니다. 즉, 학습을 완료한 이후, W와 b는 각각 4, 7의 값을 얻어야 할 것입니다.
+sample 값과 target을 위와 같이 정의합니다. 이 데이터를 가장 잘 나타내는 선은 \
+H(x) = 4x + 7입니다. 즉, 학습을 완료한 이후, W와 b는 각각 4, 7의 값을 얻어야 할 것입니다.
 
 ```python
 W = 0.0
@@ -48,16 +48,15 @@ if i % 200 == 0:
      .format(i, epoch, cost, W, b) )
 ```
 
-`gradient_w`는 Cost Function 혹은 MSE를 W에 대해 편미분한 값입니다. 그리고, 학습률과 곱하여 경사하강법을 적용하여 W를 계속하여 새로운 값으로 초기화 해줍니다.   
+`gradient_w`는 Cost Function 혹은 MSE를 W에 대해 편미분한 값입니다. 그리고, 학습률과 곱하여 경사하강법을 적용하여 W를 계속하여 새로운 값으로 초기화 해줍니다. \
 `gradient_b`는 MSE를 b에 대해 편미분한 값입니다. 
 
-이후 200번째 사이클마다 학습 횟수/cost/W 값/b 값을 출력하도록 합니다.  
-format\( \) 함수를 이용하여 프린트문을 출력하고자 합니다.   
+이후 200번째 사이클마다 학습 횟수/cost/W 값/b 값을 출력하도록 합니다.\
+format( ) 함수를 이용하여 프린트문을 출력하고자 합니다. \
 `{ : 15.10f }`라고 했을 때,  실수가 15칸의 자리공간을 차지하며, 소수점 10자리까지 표시하겠다는 뜻입니다.
 
-![](../.gitbook/assets/image%20%2817%29.png)
+![](<../.gitbook/assets/image (47).png>)
 
-이를 출력하면, 위와 같은 결과를 얻을 수 있습니다. 학습을 반복할수록 cost가 줄어듦과 동시에 W와 b의 값이 우리가 목표한 값\(W=4, b=7\)에 점점 가까워짐을 확인할 수 있습니다. 그리고, 이전 페이지 '수렴'에서 언급했듯이 사이클을 반복할수록 변동폭이 줄어듦을 알 수 있습니다. 
+이를 출력하면, 위와 같은 결과를 얻을 수 있습니다. 학습을 반복할수록 cost가 줄어듦과 동시에 W와 b의 값이 우리가 목표한 값(W=4, b=7)에 점점 가까워짐을 확인할 수 있습니다. 그리고, 이전 페이지 '수렴'에서 언급했듯이 사이클을 반복할수록 변동폭이 줄어듦을 알 수 있습니다. 
 
-![Final result after 5000 cycles](../.gitbook/assets/image%20%2839%29.png)
-
+![Final result after 5000 cycles](<../.gitbook/assets/image (48).png>)

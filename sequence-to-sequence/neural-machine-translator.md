@@ -1,5 +1,5 @@
 ---
-description: 'Pytorch 사이트에서 제공한 seq2seq 튜토리얼을 참고하여, 영어-프랑스어 번역기를 제작한다.'
+description: Pytorch 사이트에서 제공한 seq2seq 튜토리얼을 참고하여, 영어-프랑스어 번역기를 제작한다.
 ---
 
 # Eng-Fra Translator
@@ -20,9 +20,11 @@ import torch.nn.functional as F
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ```
 
-### 1\) 데이터 준비 과정
+### 1) 데이터 준비 과정
 
-{% file src="../.gitbook/assets/data.zip" caption="data/eng-fa" %}
+{% file src="../.gitbook/assets/data.zip" %}
+data/eng-fa
+{% endfile %}
 
 ```python
 SOS_token = 0
@@ -70,7 +72,7 @@ def normalizeString(s):
     return s
 ```
 
-다음은 문장을 정규화하는 과정이다. 위에 첨부해놓은 data.zip은 모두 Unicode로 이루어져있다. 이를 ASCII로 변환해주고, 대문자를 모두 소문자로 변경해준다. 또한, 문장부호와 알파벳을 제외한 모든 단어를 제거해준다. 다시 한번 언급하자면, 컴퓨터는 소문자와 대문자가 섞여있다면, 다른 단어로 인식한다. 또한, 문장부호가 붙어있는 것도 마찬가지이다. 그리하여, 납득할만한 결과를 얻기 위하여 이러한 데이터 전처리 과정이 필수적이다. \(한국어를 다룰 때에는 형태소 분석기 사용을 추천한다\)
+다음은 문장을 정규화하는 과정이다. 위에 첨부해놓은 data.zip은 모두 Unicode로 이루어져있다. 이를 ASCII로 변환해주고, 대문자를 모두 소문자로 변경해준다. 또한, 문장부호와 알파벳을 제외한 모든 단어를 제거해준다. 다시 한번 언급하자면, 컴퓨터는 소문자와 대문자가 섞여있다면, 다른 단어로 인식한다. 또한, 문장부호가 붙어있는 것도 마찬가지이다. 그리하여, 납득할만한 결과를 얻기 위하여 이러한 데이터 전처리 과정이 필수적이다. (한국어를 다룰 때에는 형태소 분석기 사용을 추천한다)
 
 한국어를 다룰 때, 위에 있는 unicodeToAscii 함수를 사용하면, 한국어 데이터가 그대로 없어진다.
 
@@ -92,7 +94,7 @@ ef readLangs(lang1, lang2, reverse=False):
     return input_lang, output_lang, pairs
 ```
 
-본격적으로 data를 추출하는 단계이다. data.zip의 압축을 풀고, python 파일과 같은 디렉토리 내에 `eng-fra.txt`와 같이 저장해준다. `.read().strip().split('\n)`을 통해서 메모장에 있는 파일을 줄 단위로 받아온다. \(`.strip()`은 문자열의 양 끝에 있는 공백 혹은 \n을 제거해주는 함수이다.
+본격적으로 data를 추출하는 단계이다. data.zip의 압축을 풀고, python 파일과 같은 디렉토리 내에 `eng-fra.txt`와 같이 저장해준다. `.read().strip().split('\n)`을 통해서 메모장에 있는 파일을 줄 단위로 받아온다. (`.strip()`은 문자열의 양 끝에 있는 공백 혹은 \n을 제거해주는 함수이다.
 
 그 다음에 한 줄에서 영어 문장 한 개와 프랑스어 문장 한 개 짝을 이루어서 받아오는 pair를 만들어준다. 메모장에서 한 줄에 영어와 프랑스어가 tab으로 구분되어 있어 `.split('\t')`으로 pair를 만든다.
 
@@ -116,9 +118,9 @@ def filterPairs(pairs):
     return [pair for pair in pairs if filterPair(pair)]
 ```
 
-본래는 모든 데이터를 학습시키는 데에는 꽤 오랜 시간을 요구한다. 이러한 시간을 조금 줄이고자, 몇가지 필터링을 추가시키고자 한다.  
-1\) 문장의 길이가 MAXLENGTH 이하인 문장만 학습한다.  
-2\) eng\_prefixes를 선언하여, 이의 형태로 시작하는 문장만 골라서 학습한다.
+본래는 모든 데이터를 학습시키는 데에는 꽤 오랜 시간을 요구한다. 이러한 시간을 조금 줄이고자, 몇가지 필터링을 추가시키고자 한다.\
+1\) 문장의 길이가 MAXLENGTH 이하인 문장만 학습한다.\
+2\) eng_prefixes를 선언하여, 이의 형태로 시작하는 문장만 골라서 학습한다.
 
 ```python
 def prepareData(lang1, lang2, reverse=False):
@@ -138,9 +140,9 @@ def prepareData(lang1, lang2, reverse=False):
     return input_lang, output_lang, pairs
 ```
 
-![Data preprocessing Result](../.gitbook/assets/2021-09-04-1.10.18.png)
+![Data preprocessing Result](<../.gitbook/assets/스크린샷 2021-09-04 오전 1.10.18.png>)
 
-### 2\) Encoder, Decoder 제작
+### 2) Encoder, Decoder 제작
 
 ```python
 class EncoderRNN(nn.Module):
@@ -163,7 +165,7 @@ class EncoderRNN(nn.Module):
 
 앞선 챕터에서 명한 RNN과 매우 유사한 구조이다. 더 자세한 설명은 gitbook에서 RNN 부분을 참고하면될 것 같다. 더 나은 퍼포먼스를 위하여 RNN 셀이 아닌 GRU 셀을 이용하였다. hidden state의 초기값은 `torch.zeros`를 이용하여 0으로 주었다.
 
-![How Encoder works](../.gitbook/assets/2021-09-04-1.18.25.png)
+![How Encoder works](<../.gitbook/assets/스크린샷 2021-09-04 오전 1.18.25.png>)
 
 ```python
 class DecoderRNN(nn.Module):
@@ -190,9 +192,9 @@ class DecoderRNN(nn.Module):
 
 Decoder 또한 GRU 셀을 이용하였고, 활성화 함수는 ReLU를 이용했다. 이후에, 최종 ouput은 Softmax 함수를 이용하여, 다음에 올 확률이 가장 높은 단어를 선택할 수 있도록 한다. Encoder와 Decoder 둘 다 첨부한 사진을 토대로 코드와 비교하면서 보면 이해를 도울 수 있다. 
 
-![How Decoder works](../.gitbook/assets/2021-09-04-1.20.22.png)
+![How Decoder works](<../.gitbook/assets/스크린샷 2021-09-04 오전 1.20.22.png>)
 
-### 3\) Training
+### 3) Training
 
 ```python
 def indexesFromSentence(lang, sentence):
@@ -272,22 +274,22 @@ def train(input_tensor, target_tensor, encoder, decoder, encoder_optimizer, deco
 
 위 코드를 `'''Teacher Forcing'''` 부분에 삽입하면 된다. 
 
-이 코드에서는 `teacher_forcing_ratio`이라는 변수에 0~1 값을 선언하여, 'Teacher Forcing'을 거치는 비율 또한 설정할 수 있다. `if use_teacher_forcing:` 에서는 위에서 설명한대로 loss값을 ouput과 target\_tensor로 구하는 것을 볼 수 있다. 
+이 코드에서는 `teacher_forcing_ratio`이라는 변수에 0\~1 값을 선언하여, 'Teacher Forcing'을 거치는 비율 또한 설정할 수 있다. `if use_teacher_forcing: `에서는 위에서 설명한대로 loss값을 ouput과 target_tensor로 구하는 것을 볼 수 있다. 
 
-`else:` 에서는 교사 강요를 사용하지 않고 Decoder가 예측한 값을 이용하고자 한다. DecoderRNN 클래스를 보면, Decoder는 output과 hidden state를 매번 return한다.   
-`.topk()`은 가장 큰 element를 반환해주는 함수이다.  
+`else: `에서는 교사 강요를 사용하지 않고 Decoder가 예측한 값을 이용하고자 한다. DecoderRNN 클래스를 보면, Decoder는 output과 hidden state를 매번 return한다. \
+`.topk()`은 가장 큰 element를 반환해주는 함수이다.\
 [torch.topk documentation: https://pytorch.org/docs/stable/generated/torch.topk.html](https://pytorch.org/docs/stable/generated/torch.topk.html)`torch.topk`는 return 값으로 가장 큰 element의 value와 그 index를 return한다. 
 
 즉, `decoder_output.topk(1)`에서 가장 큰 value를 가진 element 한 개를 내보내는데, 그 element의 value는 `topv`, 그 index는 `topi`에 저장한다. 위 과정을 console 창에서 밑과 같이 확인할 수 있다.
 
-![](../.gitbook/assets/2021-09-04-2.19.22.png)
+![](<../.gitbook/assets/스크린샷 2021-09-04 오전 2.19.22.png>)
 
-결국, `torch.topk`를 이용하여 Decoder에서 가장 다음에 올 확률이 큰 단어를 정하는 것이다. 그리고, 그 단어의 index를 뽑아서, 다음 Decoder의 `decoder_input`으로 넣어준다.   
+결국, `torch.topk`를 이용하여 Decoder에서 가장 다음에 올 확률이 큰 단어를 정하는 것이다. 그리고, 그 단어의 index를 뽑아서, 다음 Decoder의 `decoder_input`으로 넣어준다. \
 `decoder_input = topi.squeeze().detach()`에서 `.squeeze()`는 혹시 size가 1인 dimension을 삭제해주는 함수이고, `.detach()`는 `with torch.no_grad():`와 같다고 생각하면 편다. Decoder에 input으로 넣을 이 변수에서 더 이상 gradient를 요구하지 않고, back propagation에 의해서 변하지 않게 한다. [torch.Tensor.detach documentation: https://pytorch.org/docs/stable/generated/torch.Tensor.detach.html](https://pytorch.org/docs/stable/generated/torch.Tensor.detach.html)
 
-![+\) Error: if there is not topv](../.gitbook/assets/2021-09-04-2.01.12.png)
+![+) Error: if there is not topv](<../.gitbook/assets/스크린샷 2021-09-04 오전 2.01.12.png>)
 
-~~Q\) `.squeeze()`를 왜 넣었는가? index가 1인 단어는 &lt;EOS&gt;라서 인가?~~
+~~Q) `.squeeze()`를 왜 넣었는가? index가 1인 단어는 \<EOS>라서 인가?~~
 
 ```python
 '''
@@ -341,7 +343,7 @@ def trainIters(encoder, decoder, n_iters, print_every=1000, plot_every=100, lear
             plot_loss_total = 0
 ```
 
-optimizer로는 SGD를 사용하였고, loss Function으로는 NLLLoss를 사용했다.  
+optimizer로는 SGD를 사용하였고, loss Function으로는 NLLLoss를 사용했다.\
 학습 중에 진행 과정을 시각화 해주기 위하여, asMinute 함수와 timeSince 함수를 만들어주었다.
 
 ```python
@@ -352,11 +354,11 @@ decoder1 = DecoderRNN(hidden_size, output_lang.n_words).to(device)
 trainIters(encoder1, decoder1, 75000, print_every=5000)
 ```
 
-이 코드에서 GRU 셀로 만든 Encoder와 Decoder 이용한다. \(이후에는 'Attention'을 추가한 Decoder를 적용해보고자 한다\) Iter 횟수는 75000번, 5000번마다 진행상황을 출력하도록 했다.
+이 코드에서 GRU 셀로 만든 Encoder와 Decoder 이용한다. (이후에는 'Attention'을 추가한 Decoder를 적용해보고자 한다) Iter 횟수는 75000번, 5000번마다 진행상황을 출력하도록 했다.
 
-![Using NVIDIA GTX 3060Ti](../.gitbook/assets/image%20%281%29.png)
+![Using NVIDIA GTX 3060Ti](<../.gitbook/assets/image (67).png>)
 
-### 4\) Evaluate
+### 4) Evaluate
 
 ```python
 def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
@@ -410,13 +412,12 @@ def translate(sentence):
     print(output_sentence)
 ```
 
-Decoder는 처음에 input으로 &lt;SOS&gt;와 이전 hidden state인 `encoder_hidden`을 받는다. 그리고, 이전에 설명했던 .topk를 이용하여 다음 단어를 예측한다. topi에 저장되어 있는 다음에 올 확률이 가장  단어의 index로 index2word에서 word를 조회하여 계속해서 문단어를 장에 더해준다. 마지막으로 index로 &lt;EOS&gt;를 받으면 마지막 문장에 &lt;EOS&gt;를 append하고 종료한다.
+Decoder는 처음에 input으로 \<SOS>와 이전 hidden state인 `encoder_hidden`을 받는다. 그리고, 이전에 설명했던 .topk를 이용하여 다음 단어를 예측한다. topi에 저장되어 있는 다음에 올 확률이 가장  단어의 index로 index2word에서 word를 조회하여 계속해서 문단어를 장에 더해준다. 마지막으로 index로 \<EOS>를 받으면 마지막 문장에 \<EOS>를 append하고 종료한다.
 
-따로 translate라는 함수를 만들어놓았으므로, word2index에 이미 존재하는 word에 한해서, string 형식으로 프랑스어를 입력한다면, 앞서 만든 모델이 번역한 영어 문장을 받아볼 수 있다.  
-\(Attention 관련한 부분은 일단 주석처리 하였다\)
+따로 translate라는 함수를 만들어놓았으므로, word2index에 이미 존재하는 word에 한해서, string 형식으로 프랑스어를 입력한다면, 앞서 만든 모델이 번역한 영어 문장을 받아볼 수 있다.\
+(Attention 관련한 부분은 일단 주석처리 하였다)
 
-![](../.gitbook/assets/2021-09-04-2.38.19.png)
+![](<../.gitbook/assets/스크린샷 2021-09-04 오전 2.38.19.png>)
 
-사진 및 내용 출처:  
-[https://pytorch.org/tutorials/intermediate/seq2seq\_translation\_tutorial.html](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
-
+사진 및 내용 출처:\
+[https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
