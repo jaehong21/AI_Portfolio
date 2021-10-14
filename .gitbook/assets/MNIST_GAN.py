@@ -1,10 +1,8 @@
-# MNIST Text Generation
-
-```python
 #!/usr/bin/env python
 # coding: utf-8
 
 # In[1]:
+
 
 import torch
 import torch.nn as nn
@@ -100,7 +98,7 @@ print(D(G(z)).item())
 
 
 criterion = nn.BCELoss()
-ddef train(G, D, optim_G, optim_D):
+def train(G, D, optim_G, optim_D):
     G.train()
     D.train()
     
@@ -148,10 +146,10 @@ ddef train(G, D, optim_G, optim_D):
 # In[7]:
 
 
-ccorrect_batch_list = []
-wwrong_batch_list = []
+correct_batch_list = []
+wrong_batch_list = []
 
-ddef evaluate(G, D):
+def evaluate(G, D):
     correct_sum, wrong_sum = 0.0, 0.0
     G.eval()
     D.eval()
@@ -176,25 +174,25 @@ ddef evaluate(G, D):
 
 
 """
-ddef init_params(model):
+def init_params(model):
     for p in model.parameters():
         if(p.dim() > 1):
             nn.init.xavier_normal_(p)
         else:
             nn.init.uniform_(p, 0.1, 0.2)
 
-iinit_params(G)
-iinit_params(D)
+init_params(G)
+init_params(D)
 """
 
-## lr=0.1, lr=0.01 tried
-ooptim_G = optim.Adam(G.parameters(), lr=0.001)
-ooptim_D = optim.Adam(D.parameters(), lr=0.001)
+# lr=0.1, lr=0.01 tried
+optim_G = optim.Adam(G.parameters(), lr=0.001)
+optim_D = optim.Adam(D.parameters(), lr=0.001)
 
-ccorrect_epoch_list = []
-wwrong_epoch_list = []
+correct_epoch_list = []
+wrong_epoch_list = []
 
-ffor epoch in range(300):
+for epoch in range(300):
 
     train(G, D, optim_G, optim_D)
     correct, wrong = evaluate(G,D)
@@ -208,9 +206,12 @@ ffor epoch in range(300):
         img_fake = G(z).view(1, 28, 28)
         showImg(img_fake.squeeze().detach())
         
+
+
 # In[19]:
 
-ffor i in range(20):
+
+for i in range(20):
     z = fakeImg()
     img_fake = G(z).view(1, 28, 28)
     showImg(img_fake.squeeze().detach())
@@ -219,22 +220,21 @@ ffor i in range(20):
 # In[14]:
 
 
-pplt.plot(wrong_epoch_list[2:], label='D(x_generated)')
-pplt.plot(correct_epoch_list[2:], label='D(x_real)')
-pplt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+plt.plot(wrong_epoch_list[2:], label='D(x_generated)')
+plt.plot(correct_epoch_list[2:], label='D(x_real)')
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
-pplt.show()
+plt.show()
 
-pplt.plot(wrong_batch_list[5000:], label='D(x_generated)')
-pplt.plot(correct_batch_list[5000:], label='D(x_real)')
-pplt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+plt.plot(wrong_batch_list[5000:], label='D(x_generated)')
+plt.plot(correct_batch_list[5000:], label='D(x_real)')
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
-pplt.show()
+plt.show()
 
-```
 
-![Every 30 epochs out of total 210 epochs](<../.gitbook/assets/스크린샷 2021-10-14 오전 9.07.46.png>)
+# In[ ]:
 
-![result samples for 210 epochs](<../.gitbook/assets/스크린샷 2021-10-14 오전 9.09.16.png>)
 
-![Graph (epoch / batch)](<../.gitbook/assets/스크린샷 2021-10-14 오전 9.09.50.png>)
+
+
